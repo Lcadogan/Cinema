@@ -1,11 +1,13 @@
 package com.example.cinema;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Seat {
 
     private final int row;
     private final int column;
     private final int price;
-    private boolean purchase = false;
+    private boolean isPurchase = false;
 
     public Seat(int row, int column, int price) {
         this.row = row;
@@ -25,9 +27,12 @@ public class Seat {
         return column;
     }
 
+    @JsonIgnore
     public boolean isPurchase() {
-        return purchase;
+        return isPurchase;
     }
 
-    public void buyingTicket() {this.purchase = true;}
+    public void setPurchase(boolean purchase) {
+        this.isPurchase = purchase;
+    }
 }
