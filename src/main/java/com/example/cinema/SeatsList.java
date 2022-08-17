@@ -37,14 +37,6 @@ public class SeatsList {
         return totalRows;
     }
 
-//    public List<Token> getAvailableSeats() {
-//        return availableSeats;
-//    }
-
-//    public void setAvailableSeats(List<Token> availableSeats) {
-//        this.availableSeats = availableSeats;
-//    }
-
     public void setTotalRows(int totalRows) {
         this.totalRows = totalRows;
     }
