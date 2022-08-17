@@ -1,5 +1,6 @@
 package com.example.cinema;
 
+import java.util.List;
 import java.util.UUID;
 
 public class Token {
@@ -9,14 +10,15 @@ public class Token {
 
     public Token(Ticket ticket) {
         this.token = UUID.randomUUID();
+        ticket.setPurchase(true);
         this.ticket = ticket;
-    }
-
-    public Ticket getTicket() {
-        return ticket;
     }
 
     public UUID getToken() {
         return token;
+    }
+
+    public Ticket getTicket() {
+        return ticket;
     }
 }

@@ -7,9 +7,7 @@ public class SeatsList {
 
     private int totalRows;
     private int totalColumns;
-    private final int ticketPriceUpTo4rows = 10;
-    private final int ticketPriceOther = 8;
-    List<Token> availableSeats = new ArrayList<>();
+    List<Ticket> availableSeats = new ArrayList<>();
 
 
     public SeatsList(int totalRows, int totalColumns) {
@@ -23,26 +21,29 @@ public class SeatsList {
         for (int i = 1; i < totalRows + 1; i++) {
             for (int j = 1; j < totalColumns + 1; j++) {
                 if (i <= 4) {
-                    availableSeats.add(new Token(new Ticket(i, j, ticketPriceUpTo4rows )));
+                    availableSeats.add(new Ticket(i, j, 10 ));
                 } else {
-                    availableSeats.add(new Token(new Ticket(i, j, ticketPriceOther)));
+                    availableSeats.add(new Ticket(i, j, 8));
                 }
             }
         }
     }
 
+    public List<Ticket> getAvailableSeats() {
+        return availableSeats;
+    }
 
     public int getTotalRows() {
         return totalRows;
     }
 
-    public List<Token> getAvailableSeats() {
-        return availableSeats;
-    }
+//    public List<Token> getAvailableSeats() {
+//        return availableSeats;
+//    }
 
-    public void setAvailableSeats(List<Token> availableSeats) {
-        this.availableSeats = availableSeats;
-    }
+//    public void setAvailableSeats(List<Token> availableSeats) {
+//        this.availableSeats = availableSeats;
+//    }
 
     public void setTotalRows(int totalRows) {
         this.totalRows = totalRows;

@@ -4,24 +4,29 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 public class SeatsController {
 
     private final SeatsList seats = new SeatsList(9, 9);
+    private final List <Token> soldTicket = new ArrayList<>();
 
-        @GetMapping("/seats")
+    @GetMapping("/seats")
         public SeatsList getSeatList () {
             return seats;
         }
 
         @PostMapping("/purchase")
         public Object postPurchase(@RequestBody SeatInfo seatInfo) {
-            for(Token token: seats.availableSeats) {
-                if (token.getTicket().getRow() == seatInfo.getRow() && token.getTicket().getColumn() == seatInfo.getColumn()) {
-                   if (token.getTicket().isPurchase()) {
+            for(Ticket ticket: seats.availableSeats) {
+                if (ticket.getRow() == seatInfo.getRow() && ticket.getColumn() == seatInfo.getColumn()) {
+                   if (ticket.isPurchase()) {
                        return new ResponseEntity<>(new ErrorResponse("The ticket has been already purchased!"), HttpStatus.BAD_REQUEST);
                    }else {
-                       token.getTicket().setPurchase(true);
+                       Token token = new Token(ticket);
+                       soldTicket.add(token);
                        return token;
                    }
                 }
@@ -31,7 +36,7 @@ public class SeatsController {
 
         @PostMapping("/return")
     public Object postReturn(@RequestBody TokenInfo tokenInfo) {
-            for(Token token: seats.availableSeats) {
+            for(Token token: soldTicket) {
                 if (token.getToken().equals(tokenInfo.getToken())) {
                     token.getTicket().setPurchase(false);
                     return new ReturnedTicket(token.getTicket()) ;
