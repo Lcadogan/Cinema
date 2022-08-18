@@ -48,4 +48,5 @@ public class SeatsList {
     public void setTotalColumns(int totalColimns) {
         this.totalColumns = totalColimns;
     }
+
 }
