@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class SeatsController {
@@ -28,7 +27,6 @@ public class SeatsController {
                    return new ResponseEntity<>(new ErrorResponse("The ticket has been already purchased!"), HttpStatus.BAD_REQUEST);
                }else {
                    Token token = new Token(ticket);
-                   seats.availableSeats.remove(ticket);
                    currentIncome += ticket.getPrice();
                    soldTicket.add(token);
                    return token;
@@ -42,7 +40,6 @@ public class SeatsController {
     public Object postReturn(@RequestBody TokenInfo tokenInfo) {
         for(Token token: soldTicket) {
             if (token.getToken().equals(tokenInfo.getToken())) {
-                seats.availableSeats.add(token.getTicket());
                 token.getTicket().setPurchase(false);
                 currentIncome -= token.getTicket().getPrice();
                 soldTicket.remove(token);

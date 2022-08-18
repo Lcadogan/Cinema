@@ -9,7 +9,7 @@ public class Stats {
 
     public Stats(int currentIncome, int numberOfAvailable_seats, int numberOfPurhasedTickets) {
         this.currentIncome = currentIncome;
-        this.numberOfAvailable_seats = numberOfAvailable_seats;
+        this.numberOfAvailable_seats = numberOfAvailable_seats - numberOfPurhasedTickets;
         this.numberOfPurchasedTickets = numberOfPurhasedTickets;
     }
 
