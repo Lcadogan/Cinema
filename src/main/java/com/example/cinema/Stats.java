@@ -2,7 +2,7 @@ package com.example.cinema;
 
 public class Stats {
 
-    private static final String superSecret = "123";
+    private static final String password = "super_secret";
     private final int currentIncome;
     private final int numberOfAvailable_seats;
     private final int numberOfPurchasedTickets;
@@ -14,7 +14,7 @@ public class Stats {
     }
 
     public static String getPassword() {
-        return superSecret;
+        return password;
     }
 
     public int getCurrentIncome() {

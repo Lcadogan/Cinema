@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class SeatsController {
@@ -50,8 +51,8 @@ public class SeatsController {
     }
 
     @PostMapping("/stats")
-    public Object postStats(@RequestParam (value = "password", required = false) String password) {
-        if (password.equals(Stats.getPassword())) {
+    public Object postStats(@RequestParam Optional<String> password) {
+        if (password.orElse("").equals(Stats.getPassword())) {
             return new Stats( currentIncome, seats.availableSeats.size(), soldTicket.size());
         }
         return new ResponseEntity<>(new ErrorResponse("The password is wrong!"), HttpStatus.UNAUTHORIZED);
